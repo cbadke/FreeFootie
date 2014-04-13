@@ -6,8 +6,6 @@ angular.module('freefootieApp')
     var Team = $resource('/api/teams/:id');
     var Division = $resource('/api/divisions/:id');
 
-    $scope.edit = {editing: false};
-
     var teamCheckpoint = $scope.currentTeam = Team.get({id: $routeParams.id}, function(team) {
        teamCheckpoint = angular.copy(team);
     });
@@ -30,5 +28,7 @@ angular.module('freefootieApp')
       angular.copy(teamCheckpoint, $scope.currentTeam);
     };
 
-  });
+    $scope.addPlayer = function() {
+      $scope.currentTeam.players.push({number: "", name: "New Player"});
+    };
 });
